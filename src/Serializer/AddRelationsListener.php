@@ -54,6 +54,11 @@ class AddRelationsListener
     {
         $object  = $event->getObject();
         $context = $event->getContext();
+        if ($context->hasAttribute('disable_hateoas') &&
+            $context->getAttribute('disable_hateoas') === true
+        ) {
+            return;
+        }
 
         $context->startVisiting($object);
 
